@@ -1,11 +1,13 @@
-import javafx.scene.effect.Light;
+package InterpolationGenerator;
+
+import javafx.geometry.Point2D;
 
 import java.util.Vector;
-import javafx.scene.effect.Light.Point;
+
 
 public class InterpolationGenerator {
 
-    private Vector<Point> points; // this vector will hold quadratic graph points
+    private Vector<Point2D> points; // this vector will hold quadratic graph points
     private Vector<QuadraticEquation> equations; // this vector will hold the quadratic graph equations
 
 
@@ -14,7 +16,7 @@ public class InterpolationGenerator {
         equations = new Vector<>();
     }
 
-    public InterpolationGenerator(Vector<Point> points) {
+    public InterpolationGenerator(Vector<Point2D> points) {
 
         this.points = points;
 
@@ -29,8 +31,8 @@ public class InterpolationGenerator {
 
         equations.clear();
 
-        Point fPoint = points.get(0);
-        Point sPoint = points.get(1);
+        Point2D fPoint = points.get(0);
+        Point2D sPoint = points.get(1);
 
         double a, b, c;
 
@@ -43,7 +45,7 @@ public class InterpolationGenerator {
 
         equations.add(new QuadraticEquation(a, b, c));
 
-        for (int i = 1; i < points.size() - 2; i++) {
+        for (int i = 1; i < points.size() - 1; i++) {
 
             fPoint = points.get(i);
             sPoint = points.get(i + 1);
@@ -52,6 +54,8 @@ public class InterpolationGenerator {
             solver.setFirstEquation(Math.pow(fPoint.getX(), 2), fPoint.getX(), 1, fPoint.getY());
             solver.setSecondEquation(Math.pow(sPoint.getX(), 2), sPoint.getX(), 1, sPoint.getY());
             solver.setThirdEquation(2 * fPoint.getX(), 1, 0, 2 * fPoint.getX() * lastEquation.getA() + lastEquation.getB());
+
+            solver.solve();
 
             a = solver.getFirstVariable();
             b = solver.getSecondVariable();
@@ -63,12 +67,20 @@ public class InterpolationGenerator {
 
     }
 
-    public Vector<Point> getPoints() {
+    public Vector<Point2D> getPoints() {
         return points;
     }
 
-    public void setPoints(Vector<Point> points) {
+    public void setPoints(Vector<Point2D> points) {
         this.points = points;
+    }
+
+    public void addPoint(Point2D newPoint) {
+        points.add(newPoint);
+    }
+
+    public void addPoint(Point2D newPoint, int index) {
+        points.add(index, newPoint);
     }
 
     public Vector<QuadraticEquation> getEquations() {

@@ -1,3 +1,5 @@
+package InterpolationGenerator;
+
 public class ThreeEquationSystemSolver {
 
     // | a1     b1      c1 |         | firstVariable  |        | d1 |

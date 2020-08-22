@@ -1,3 +1,5 @@
+package InterpolationGenerator;
+
 public class QuadraticEquation {
 
 
