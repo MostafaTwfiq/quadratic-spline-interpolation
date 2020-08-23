@@ -1,6 +1,6 @@
 package InterpolationGenerator;
 
-public class LinearEquation {
+public class LinearEquation implements IEquation{
 
     double a;
     double b;
@@ -14,6 +14,7 @@ public class LinearEquation {
     }
 
 
+    @Override
     public double calculateAtPoint(double x) {
 
         return a * x + b;

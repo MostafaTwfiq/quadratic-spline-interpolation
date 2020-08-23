@@ -1,6 +1,6 @@
 package InterpolationGenerator;
 
-public class QuadraticEquation {
+public class QuadraticEquation implements IEquation{
 
 
 
@@ -53,12 +53,14 @@ public class QuadraticEquation {
     }
 
 
+
     /** This function will calculate the function at the passed point.
      *
      * @param x the function variable value.
      * @return it will return the calculated function value at the given point
      */
 
+    @Override
     public double calculateAtPoint(double x) {
 
         return a * Math.pow(x, 2) + b * x + c;
