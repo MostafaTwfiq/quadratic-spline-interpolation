@@ -15,8 +15,6 @@ public class ControlPointGenerator {
             double m1 = equation.getA() * 2 * startPoint.getX() + equation.getB();
             double m2 = equation.getA() * 2 * endPoint.getX() + equation.getB();
 
-            //m1 *= -1; m2 *= -1;
-
             LinearEquation linearEquation1 = new LinearEquation(m1, startPoint.getY() - startPoint.getX() * m1);
             LinearEquation linearEquation2 = new LinearEquation(m2, endPoint.getY() - endPoint.getX() * m2);
 

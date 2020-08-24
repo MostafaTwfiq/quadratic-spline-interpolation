@@ -4,7 +4,6 @@ import InterpolationGenerator.QuadraticEquation;
 import javafx.animation.*;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
@@ -30,29 +29,13 @@ public class CurveDrawer {
                 );
 
 
-        Rectangle rec = new Rectangle(10, 10);
+        BezierCurveVisualizer visualizer = new BezierCurveVisualizer(point1, controlPoint, point2, pane, 2000);
 
-        rec.setTranslateX(point1.getX() - 5);
-        rec.setTranslateY(point1.getY() - 5);
-        rec.setFill(Color.RED);
+        visualizer.startVisualizing();
 
-        pane.getChildren().add(rec);
+        Timeline addingCurveTimeLine = new Timeline(new KeyFrame(Duration.millis(2000), e -> pane.getChildren().add(curve)));
 
-        Path path = new Path();
-        path.getElements().add(new MoveTo(point1.getX(), point1.getY()));
-        path.getElements().add(new QuadCurveTo(
-                controlPoint.getX(), controlPoint.getY(),
-                point2.getX(), point2.getY()));
-        PathTransition pt = new PathTransition(Duration.millis(2000), path);
-
-        pt.setNode(rec);
-
-        pt.setOnFinished(e -> {
-            pane.getChildren().remove(rec);
-            pane.getChildren().add(curve);
-        });
-
-        pt.play();
+        addingCurveTimeLine.play();
 
     }
 
