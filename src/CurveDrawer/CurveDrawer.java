@@ -9,6 +9,8 @@ import javafx.util.Duration;
 
 public class CurveDrawer {
 
+    private final double drawingTime = 10000;
+
     private ICurveGenerator curveGenerator;
 
     public CurveDrawer(ICurveGenerator curveGenerator) {
@@ -17,7 +19,7 @@ public class CurveDrawer {
 
     }
 
-    public void drawCurve(Point2D point1, Point2D point2, QuadraticEquation equation, Pane pane) {
+    public void drawCurve(Point2D point1, Point2D point2, QuadraticEquation equation, Pane pane, double animationSpeed) {
 
         Point2D controlPoint = ControlPointGenerator.quadraticEquationControlPoint(point1, point2, equation);
 
@@ -29,11 +31,15 @@ public class CurveDrawer {
                 );
 
 
-        BezierCurveVisualizer visualizer = new BezierCurveVisualizer(point1, controlPoint, point2, pane, 2000);
+        double time = drawingTime * (1 - animationSpeed);
+
+        time = time <= 0 ? 0.1 : time;
+
+        BezierCurveVisualizer visualizer = new BezierCurveVisualizer(point1, controlPoint, point2, pane, time);
 
         visualizer.startVisualizing();
 
-        Timeline addingCurveTimeLine = new Timeline(new KeyFrame(Duration.millis(2000), e -> pane.getChildren().add(curve)));
+        Timeline addingCurveTimeLine = new Timeline(new KeyFrame(Duration.millis(time), e -> pane.getChildren().add(curve)));
 
         addingCurveTimeLine.play();
 

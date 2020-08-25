@@ -29,7 +29,7 @@ public class PointsDrawer {
     }
 
 
-    public void drawNext() {
+    public void drawNext(double animationSpeed) {
 
         calculateEquations();
 
@@ -41,13 +41,13 @@ public class PointsDrawer {
         Point2D point1 = points.get(currentEquationIndex);
         Point2D point2 = points.get(currentEquationIndex + 1);
 
-        curveDrawer.drawCurve(point1, point2, equation, pane);
+        curveDrawer.drawCurve(point1, point2, equation, pane, animationSpeed);
 
         currentEquationIndex++;
 
     }
 
-    public void drawAll() {
+    public void drawAll(double animationSpeed) {
 
         calculateEquations();
 
@@ -61,7 +61,7 @@ public class PointsDrawer {
             Point2D point1 = points.get(i);
             Point2D point2 = points.get(i + 1);
 
-            curveDrawer.drawCurve(point1, point2, equation, pane);
+            curveDrawer.drawCurve(point1, point2, equation, pane, animationSpeed);
 
         }
 
@@ -112,6 +112,10 @@ public class PointsDrawer {
 
         calculateEquations();
 
+    }
+
+    public Vector<QuadraticEquation> getEquations() {
+        return equations;
     }
 
 }

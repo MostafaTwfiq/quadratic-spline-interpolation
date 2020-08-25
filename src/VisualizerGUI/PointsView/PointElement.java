@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
@@ -57,19 +59,23 @@ public class PointElement extends HBox {
                     "[fFdD]?))" +
                     "[\\x00-\\x20]*");// Optional trailing "whitespace"
 
-    TextField xTextField, yTextField;
+    private TextField xTextField, yTextField;
 
-    Label xLabel, yLabel;
+    private Label xLabel, yLabel;
 
-    ImageView deleteImage;
+    private ImageView deleteImage;
 
-    String currentXText, currentYText;
+    private String currentXText, currentYText;
 
-    VBox parentPane;
+    private PointsPane parentPane;
 
-    public PointElement(double x, double y, VBox parentPane) {
+    private Rectangle pointRec;
+
+    public PointElement(double x, double y, PointsPane parentPane, Rectangle pointRec) {
 
         this.parentPane = parentPane;
+
+        this.pointRec = pointRec;
 
         currentXText = String.format("%f", x);
         currentYText = String.format("%f", y);
@@ -89,6 +95,8 @@ public class PointElement extends HBox {
 
         setPadding(new Insets(5, 5, 5, 5));
         setSpacing(5);
+
+        setAlignment(Pos.CENTER);
 
         setPrefHeight(30);
 
@@ -142,8 +150,16 @@ public class PointElement extends HBox {
             {
                 if (oldPropertyValue && !Pattern.matches(fpRegex, xTextField.getText())) {
                     xTextField.setText(currentXText);
-                } else {
+                } else if (oldPropertyValue) {
+
+                    double oldX = Double.parseDouble(currentXText),
+                            oldY,
+                            newY = oldY = Double.parseDouble(currentYText),
+                            newX = Double.parseDouble(xTextField.getText());
+
+                    parentPane.movePoint(oldX, oldY, newX, newY, pointRec);
                     currentXText = xTextField.getText();
+
                 }
             }
 
@@ -161,8 +177,16 @@ public class PointElement extends HBox {
             {
                 if (oldPropertyValue && !Pattern.matches(fpRegex, yTextField.getText())) {
                     yTextField.setText(currentYText);
-                } else {
+                } else if (oldPropertyValue) {
+
+                    double oldX,
+                            newX = oldX = Double.parseDouble(currentXText),
+                            oldY = Double.parseDouble(currentYText),
+                            newY = Double.parseDouble(yTextField.getText());
+
+                    parentPane.movePoint(oldX, oldY, newX, newY, pointRec);
                     currentYText = yTextField.getText();
+
                 }
             }
 
@@ -178,13 +202,13 @@ public class PointElement extends HBox {
 
             Image image = new Image(imageStream);
             deleteImage = new ImageView(image);
-            deleteImage.setFitHeight(20);
-            deleteImage.setFitWidth(20);
+            deleteImage.setFitHeight(18);
+            deleteImage.setFitWidth(18);
 
             deleteImage.setCursor(Cursor.HAND);
 
             deleteImage.setOnMouseClicked(e -> {
-                parentPane.getChildren().remove(this);
+                parentPane.deletePoint(this);
             });
 
         } catch (Exception e) {
@@ -203,6 +227,10 @@ public class PointElement extends HBox {
 
     public Point2D getPoint() {
         return new Point2D(getXCoordinate(), getYCoordinate());
+    }
+
+    public Rectangle getPointRec() {
+        return pointRec;
     }
 
 }

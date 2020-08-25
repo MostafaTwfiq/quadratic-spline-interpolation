@@ -36,10 +36,16 @@ public class VisualizerGUIController {
     private ScrollBar speedSlider;
 
     @FXML
-    private Button drawB;
+    private Button drawNextB;
 
     @FXML
-    private Button clearB;
+    private Button clearPointsB;
+
+    @FXML
+    private Button drawAllB;
+
+    @FXML
+    private Button clearCurvesB;
 
     public AnchorPane getParentPane() {
         return parentPane;
@@ -77,11 +83,20 @@ public class VisualizerGUIController {
         return speedSlider;
     }
 
-    public Button getDrawB() {
-        return drawB;
+    public Button getDrawNextB() {
+        return drawNextB;
     }
 
-    public Button getClearB() {
-        return clearB;
+    public Button getClearPointsB() {
+        return clearPointsB;
     }
+
+    public Button getDrawAllB() {
+        return drawAllB;
+    }
+
+    public Button getClearCurvesB() {
+        return clearCurvesB;
+    }
+
 }

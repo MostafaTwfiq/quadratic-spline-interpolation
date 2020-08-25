@@ -69,7 +69,9 @@ public class QuadraticEquation implements IEquation{
 
 
     public String toString() {
-        return a + " (X ^ 2) " + " + " + b + " X " + " + " + c;
+        return String.format("%f", a) + " (X ^ 2) " + (b > 0 ? " + " : " - ") +
+                String.format("%f", b).substring(1) + " X " + (c > 0 ? " + " : " - ") +
+                String.format("%f", c).substring(1);
     }
 
 
