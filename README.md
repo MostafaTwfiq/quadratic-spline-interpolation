@@ -275,35 +275,35 @@ Main feature of the application is that you can control the animation speed and 
   
     - We will assume that the first equation is a linear equation, So:
   
-    ![](https://latex.codecogs.com/gif.latex?y_0&space;=&space;a_0x_0^2&space;&plus;&space;b_0x_0&space;&plus;&space;c_0)
+      ![](https://latex.codecogs.com/gif.latex?y_0&space;=&space;a_0x_0^2&space;&plus;&space;b_0x_0&space;&plus;&space;c_0)
   
-    ![](https://latex.codecogs.com/gif.latex?b_0&space;=&space;\frac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1})
+      ![](https://latex.codecogs.com/gif.latex?b_0&space;=&space;\frac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1})
 
-    ![](https://latex.codecogs.com/gif.latex?c_0&space;=&space;y_0&space;-&space;x_0(\tfrac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1}))
+      ![](https://latex.codecogs.com/gif.latex?c_0&space;=&space;y_0&space;-&space;x_0(\tfrac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1}))
 
     - The equation to conclude the rest of the quadratic equations:
   
-    ![](https://latex.codecogs.com/gif.latex?y_i&space;=&space;a_ix_i^2&space;&plus;&space;b_ix_i&space;&plus;&space;c_i)
+      ![](https://latex.codecogs.com/gif.latex?y_i&space;=&space;a_ix_i^2&space;&plus;&space;b_ix_i&space;&plus;&space;c_i)
   
-    ![](https://latex.codecogs.com/gif.latex?y_{i&plus;1}&space;=&space;a_ix_{i&plus;1}^2&space;&plus;&space;b_ix_{i&plus;1}&space;&plus;&space;c_i)
+      ![](https://latex.codecogs.com/gif.latex?y_{i&plus;1}&space;=&space;a_ix_{i&plus;1}^2&space;&plus;&space;b_ix_{i&plus;1}&space;&plus;&space;c_i)
 
-    ![](https://latex.codecogs.com/gif.latex?2a_{i-1}x_i&space;&plus;&space;b_{i-1}&space;=&space;2a_{i}x_i&space;&plus;&space;b_{i})
+      ![](https://latex.codecogs.com/gif.latex?2a_{i-1}x_i&space;&plus;&space;b_{i-1}&space;=&space;2a_{i}x_i&space;&plus;&space;b_{i})
 
     - To draw Bézier curve we need three points `start, end and control`.
   
     - To get the curve point at a ratio `t` we can use the following equations:
   
-    ![](https://latex.codecogs.com/gif.latex?Xm&space;=&space;t^2(Xe&space;-&space;2Xc&space;&plus;&space;Xs)&space;&plus;&space;2t(Xc&space;-&space;Xs)&space;&plus;&space;Xs)
+      ![](https://latex.codecogs.com/gif.latex?Xm&space;=&space;t^2(Xe&space;-&space;2Xc&space;&plus;&space;Xs)&space;&plus;&space;2t(Xc&space;-&space;Xs)&space;&plus;&space;Xs)
   
-    ![](https://latex.codecogs.com/gif.latex?Ym&space;=&space;t^2(Ye&space;-&space;2Yc&space;&plus;&space;Ys)&space;&plus;&space;2t(Yc&space;-&space;Ys)&space;&plus;&space;Ys)
+      ![](https://latex.codecogs.com/gif.latex?Ym&space;=&space;t^2(Ye&space;-&space;2Yc&space;&plus;&space;Ys)&space;&plus;&space;2t(Yc&space;-&space;Ys)&space;&plus;&space;Ys)
 
-    ![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
+      ![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
 
     - To convert a quad equation to a Bézier curve we need to calculate the control point, and we can do that with the following equations:
   
-    ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
+      ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
     
-    ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
+      ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
 
 ## Screenshots
 
