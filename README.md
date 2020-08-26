@@ -224,51 +224,56 @@ Main feature of the application is that you can control the animation speed and 
 
     ![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
 
-  - Quadratic equation to Bézier curve
+  - ## Quadratic equation to Bézier curve
 
-   We know that to draw a Bézier curve we need 3 points `start, end, and control`,
-   in this case we already know the start and the end points of the curve, all what we need now is to get the control point.
-   The control point of the curve is the cross point of the tangent lines of the first and end points.
-   So how we can get the tangent line equation ?
-   As we know if we differentiate the curve equation we will get an equation that gives us the slope at any point on the curve right ?
-   We can get the slope at the first and end points, then from them we can conclude two linear equation and solve them to get the cross point.
-   So we can say that:
+     We know that to draw a Bézier curve we need 3 points `start, end, and control`,
+     in this case we already know the start and the end points of the curve, all what we need now is to get the control point.
+     The control point of the curve is the cross point of the tangent lines of the first and end points.
+     So how we can get the tangent line equation ?
+     As we know if we differentiate the curve equation we will get an equation that gives us the slope at any point on the curve right ?
+     We can get the slope at the first and end points, then from them we can conclude two linear equation and solve them to get the cross point.
+     So we can say that:
 
-   ![](https://latex.codecogs.com/gif.latex?y&space;=&space;ax^2&space;&plus;&space;bx&space;&plus;&space;c)
+     ![](https://latex.codecogs.com/gif.latex?y&space;=&space;ax^2&space;&plus;&space;bx&space;&plus;&space;c)
 
-   ![](https://latex.codecogs.com/gif.latex?\frac{dy}{dx}&space;=&space;2ax&space;&plus;&space;b)
+     ![](https://latex.codecogs.com/gif.latex?\frac{dy}{dx}&space;=&space;2ax&space;&plus;&space;b)
 
-   ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;X}&space;=&space;2ax&space;&plus;&space;b)
+     ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;X}&space;=&space;2ax&space;&plus;&space;b)
 
-   `m1` = ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;Start}&space;=&space;2aXs&space;&plus;&space;b)
+     `m1` = ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;Start}&space;=&space;2aXs&space;&plus;&space;b)
 
-   `m2` = ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;End}&space;=&space;2aXe&space;&plus;&space;b)
+     `m2` = ![](https://latex.codecogs.com/gif.latex?slope|_{at&space;End}&space;=&space;2aXe&space;&plus;&space;b)
 
-   Note that the general form for any linear equation is `y = mx + b`.
-   Then the first line equation will be:
-   `y = m1 x + b1`
-   and the second line equation is:
-   `y = m2 x + b2`
-   We already calculated `m1` and `m2`, we need now to calculate `b1` and `b2`.
-   What we can do to calculate `b1` and `b2` ?
-   Actually we know a point `(start point)` on the first line and a point `(end point)` on the second line right ?
-   So we can calculate `b1` and `b2` from them.
+     Note that the general form for any linear equation is `y = mx + b`.
+     
+     Then the first line equation will be:
+     
+     `y = m1 x + b1`
+     
+     and the second line equation is:
+     
+     `y = m2 x + b2`
+     
+     We already calculated `m1` and `m2`, we need now to calculate `b1` and `b2`.
+     What we can do to calculate `b1` and `b2` ?
+     Actually we know a point `(start point)` on the first line and a point `(end point)` on the second line right ?
+     So we can calculate `b1` and `b2` from them.
 
-   ![](https://latex.codecogs.com/gif.latex?b_1&space;=&space;Ys&space;-&space;m_1Xs)
+     ![](https://latex.codecogs.com/gif.latex?b_1&space;=&space;Ys&space;-&space;m_1Xs)
 
-   ![](https://latex.codecogs.com/gif.latex?b_2&space;=&space;Ye&space;-&space;m_2Xe)
+     ![](https://latex.codecogs.com/gif.latex?b_2&space;=&space;Ye&space;-&space;m_2Xe)
 
-   Now we need to solve the two lines equations to get the cross point:
+     Now we need to solve the two lines equations to get the cross point:
 
-   ![](https://latex.codecogs.com/gif.latex?Xc&space;=&space;-(\frac{b_2&space;-&space;b_1}{m_2&space;-&space;m_1}))
+     ![](https://latex.codecogs.com/gif.latex?Xc&space;=&space;-(\frac{b_2&space;-&space;b_1}{m_2&space;-&space;m_1}))
 
-   ![](https://latex.codecogs.com/gif.latex?Yc&space;=&space;-m_1(\frac{b_2&space;-&space;b_1}{m_2&space;-&space;m_1})&space;&plus;&space;b_1)
+     ![](https://latex.codecogs.com/gif.latex?Yc&space;=&space;-m_1(\frac{b_2&space;-&space;b_1}{m_2&space;-&space;m_1})&space;&plus;&space;b_1)
    
-   After some simplification we can say:
+     After some simplification we can say:
 
-   ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
+     ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
 
-   ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
+     ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
 
   - ## Summary
     - Number of quadratic equations = number of points - 1
