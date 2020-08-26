@@ -28,19 +28,23 @@ Main feature of the application is that you can control the animation speed and 
 
 ## Math
 
-- Quadratic spline interpolation
+  - ## Quadratic spline interpolation
 
     Let's assume that we have the following points from 0 to n:
     ![](images/points.png)
+    
     What we need is to connect every two points with a quad curve as following:
     ![](images/curves.png)
+    
     We can see that we have n + 1 points, and actually if we want to connect every two
     points then we will need n equation.
      
      So we can conclude that:
+     
     **number of equations = number of points - 1**
 
     At first you need to know that the general equation of quadratic function is as following:
+    
     f(x) =![quadratic equation](https://latex.codecogs.com/gif.latex?ax^2&space;&plus;&space;bx&space;&plus;&space;c)
 
     So the equations we have are:
@@ -63,6 +67,7 @@ Main feature of the application is that you can control the animation speed and 
 
     We will notice that we have 3 unknowns `a, b, and c` in every equation, so to calculate them we need three equation from the same equation to solve them and calculate the unknowns, so we need `3n` equations.
     Luckily we already know two points values for every equation for ex:
+    
     lest assume the first point is (10, 11) and the second one is (12, 15) so we have
 
     ![equations00](https://latex.codecogs.com/gif.latex?11&space;=a_010^2&space;&plus;&space;b_010&space;&plus;&space;c_0)
@@ -79,7 +84,7 @@ Main feature of the application is that you can control the animation speed and 
 
     ![](https://latex.codecogs.com/gif.latex?\frac{d}{dx}&space;a_ix^2&space;&plus;&space;b_ix&space;&plus;&space;c_i&space;=&space;\frac{d}{dx}&space;a_{i+1}x^2&space;&plus;&space;b_{i+1}x&space;&plus;&space;c_{i+1})
 
-    let's simplificate:
+    let's simplify:
 
     ![](https://latex.codecogs.com/gif.latex?2a_ix&space;&plus;&space;b_i&space;=&space;2a_{i+1}x&space;&plus;&space;b_{i+1})
 
@@ -117,13 +122,13 @@ Main feature of the application is that you can control the animation speed and 
 
     ![](https://latex.codecogs.com/gif.latex?2a_{i-1}x_i&space;&plus;&space;b_{i-1}&space;=&space;2a_{i}x_i&space;&plus;&space;b_{i})
 
-- Quadratic Bézier curve
+ - ## Quadratic Bézier curve
 
    In the **Quadratic Bézier curve** all what we need to draw the curve is  three points:
 
-   1. **Start  point** let's call it SP
-   2. **Control point** let's call it CP
-   3. **End point** let's call it EP
+   1. **Start  point** let's call it `SP`
+   2. **Control point** let's call it `CP`
+   3. **End point** let's call it `EP`
 
    ![](images/BezierThreePointsNotConnected.png)
 
@@ -173,12 +178,16 @@ Main feature of the application is that you can control the animation speed and 
 
     ![](https://latex.codecogs.com/gif.latex?y&space;=&space;Y&space;.&space;t)
 
-    so Yv will be:
+    So Yv will be:
+    
     Yv = Ys + y
+    
     Now what does `Y` and `X` equals ?
     `X` is the difference between `Xc and Xs`, and `Y` is the difference between `Yc and Ys`.
+    
     X = Xc - Xs
     Y = Yc - Ys
+    
     So finally the important equations will be:
 
     ![](https://latex.codecogs.com/gif.latex?Xv&space;=&space;Xs&space;&plus;&space;t.(Xc&space;-&space;Xs))
@@ -215,7 +224,7 @@ Main feature of the application is that you can control the animation speed and 
 
     ![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
 
-- Quadratic equation to Bézier curve
+  - Quadratic equation to Bézier curve
 
    We know that to draw a Bézier curve we need 3 points `start, end, and control`,
    in this case we already know the start and the end points of the curve, all what we need now is to get the control point.
@@ -237,9 +246,9 @@ Main feature of the application is that you can control the animation speed and 
 
    Note that the general form for any linear equation is `y = mx + b`.
    Then the first line equation will be:
-   y = m1 x + b1
+   `y = m1 x + b1`
    and the second line equation is:
-   y = m2 x + b2
+   `y = m2 x + b2`
    We already calculated `m1` and `m2`, we need now to calculate `b1` and `b2`.
    What we can do to calculate `b1` and `b2` ?
    Actually we know a point `(start point)` on the first line and a point `(end point)` on the second line right ?
@@ -261,24 +270,40 @@ Main feature of the application is that you can control the animation speed and 
 
    ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
 
-- # Summary
-  - Number of quadratic equations = number of points - 1
-  - We will assume that the first equation is a linear equation, So:
-  ![](https://latex.codecogs.com/gif.latex?y_0&space;=&space;a_0x_0^2&space;&plus;&space;b_0x_0&space;&plus;&space;c_0)
-![](https://latex.codecogs.com/gif.latex?b_0&space;=&space;\frac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1})
-![](https://latex.codecogs.com/gif.latex?c_0&space;=&space;y_0&space;-&space;x_0(\tfrac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1}))
-  - The equation to conclude the rest of the quadratic equations:
-  ![](https://latex.codecogs.com/gif.latex?y_i&space;=&space;a_ix_i^2&space;&plus;&space;b_ix_i&space;&plus;&space;c_i)
-![](https://latex.codecogs.com/gif.latex?y_{i&plus;1}&space;=&space;a_ix_{i&plus;1}^2&space;&plus;&space;b_ix_{i&plus;1}&space;&plus;&space;c_i)
-![](https://latex.codecogs.com/gif.latex?2a_{i-1}x_i&space;&plus;&space;b_{i-1}&space;=&space;2a_{i}x_i&space;&plus;&space;b_{i})
-  - To draw Bézier curve we need three points `start, end and control`.
-  - To get the curve point at a ratio `t` we can use the following equations:
-  ![](https://latex.codecogs.com/gif.latex?Xm&space;=&space;t^2(Xe&space;-&space;2Xc&space;&plus;&space;Xs)&space;&plus;&space;2t(Xc&space;-&space;Xs)&space;&plus;&space;Xs)
-![](https://latex.codecogs.com/gif.latex?Ym&space;=&space;t^2(Ye&space;-&space;2Yc&space;&plus;&space;Ys)&space;&plus;&space;2t(Yc&space;-&space;Ys)&space;&plus;&space;Ys)
-![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
-  - To convert a quad equation to a Bézier curve we need to calculate the control point, and we can do that with the following equations:
-  ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
-![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
+  - ## Summary
+    - Number of quadratic equations = number of points - 1
+  
+    - We will assume that the first equation is a linear equation, So:
+  
+    ![](https://latex.codecogs.com/gif.latex?y_0&space;=&space;a_0x_0^2&space;&plus;&space;b_0x_0&space;&plus;&space;c_0)
+  
+    ![](https://latex.codecogs.com/gif.latex?b_0&space;=&space;\frac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1})
+
+    ![](https://latex.codecogs.com/gif.latex?c_0&space;=&space;y_0&space;-&space;x_0(\tfrac{y_0&space;-&space;y_1}{x_0&space;-&space;x_1}))
+
+    - The equation to conclude the rest of the quadratic equations:
+  
+    ![](https://latex.codecogs.com/gif.latex?y_i&space;=&space;a_ix_i^2&space;&plus;&space;b_ix_i&space;&plus;&space;c_i)
+  
+    ![](https://latex.codecogs.com/gif.latex?y_{i&plus;1}&space;=&space;a_ix_{i&plus;1}^2&space;&plus;&space;b_ix_{i&plus;1}&space;&plus;&space;c_i)
+
+    ![](https://latex.codecogs.com/gif.latex?2a_{i-1}x_i&space;&plus;&space;b_{i-1}&space;=&space;2a_{i}x_i&space;&plus;&space;b_{i})
+
+    - To draw Bézier curve we need three points `start, end and control`.
+  
+    - To get the curve point at a ratio `t` we can use the following equations:
+  
+    ![](https://latex.codecogs.com/gif.latex?Xm&space;=&space;t^2(Xe&space;-&space;2Xc&space;&plus;&space;Xs)&space;&plus;&space;2t(Xc&space;-&space;Xs)&space;&plus;&space;Xs)
+  
+    ![](https://latex.codecogs.com/gif.latex?Ym&space;=&space;t^2(Ye&space;-&space;2Yc&space;&plus;&space;Ys)&space;&plus;&space;2t(Yc&space;-&space;Ys)&space;&plus;&space;Ys)
+
+    ![](https://latex.codecogs.com/gif.latex?0&space;<=&space;t&space;<=&space;1)
+
+    - To convert a quad equation to a Bézier curve we need to calculate the control point, and we can do that with the following equations:
+  
+    ![](https://latex.codecogs.com/gif.latex?X_c&space;=&space;\frac{Y_e&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s-X_e)}{2a(X_s&space;-&space;X_e)})
+    
+    ![](https://latex.codecogs.com/gif.latex?Y_c=&space;(2aX_s&space;&plus;&space;b)(\frac{Ye&space;-&space;Ys&space;&plus;&space;2a(X_s^2&space;-&space;X_e^2)&space;&plus;&space;b(X_s&space;-&space;X_e)}{2a(X_s&space;-&space;X_e)}&space;-&space;X_s)&space;&plus;&space;Y_s)
 
 ## Screenshots
 
