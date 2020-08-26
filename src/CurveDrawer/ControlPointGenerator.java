@@ -21,13 +21,20 @@ public class ControlPointGenerator {
             double x = (linearEquation1.getB() - linearEquation2.getB()) / (linearEquation2.getA() - linearEquation1.getA());
             double y = linearEquation1.getA() * x + linearEquation1.getB();
 
-
             controlPoint = new Point2D(x, y);
 
         }
 
         return controlPoint;
 
+    }
+
+    private static double getX(Point2D sp, Point2D ep, QuadraticEquation e) {
+        return (ep.getY() - sp.getY() + 2 * e.getA() * (Math.pow(sp.getX(), 2) - Math.pow(ep.getX(), 2)) + e.getB() * (sp.getX() - ep.getX())) / (2 * e.getA() * (sp.getX() - ep.getX()));
+    }
+
+    private static double getY(Point2D sp, Point2D ep, QuadraticEquation e) {
+        return (2 * e.getA() * sp.getX() + e.getB()) * (getX(sp, ep, e) - sp.getX()) + sp.getY();
     }
 
 }

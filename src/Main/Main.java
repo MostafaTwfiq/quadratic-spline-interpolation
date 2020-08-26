@@ -18,6 +18,10 @@ public class Main extends Application {
 
         Stage stage = new Stage();
 
+        stage.setFullScreen(true);
+
+        stage.setTitle("Quad Spline Interpolation Visualizer");
+
         Visualizer visualizer = new Visualizer();
 
         Scene scene = new Scene(visualizer.getParentPane(), 1500, 800);

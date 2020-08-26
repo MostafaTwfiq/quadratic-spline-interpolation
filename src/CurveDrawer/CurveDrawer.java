@@ -32,7 +32,6 @@ public class CurveDrawer {
 
 
         double time = drawingTime * (1 - animationSpeed);
-
         time = time <= 0 ? 0.1 : time;
 
         BezierCurveVisualizer visualizer = new BezierCurveVisualizer(point1, controlPoint, point2, pane, time);
